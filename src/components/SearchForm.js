@@ -1,46 +1,68 @@
 import React, { Component } from 'react'
 import SearchFormInput from '../components/SearchFormInput'
+import SearchFormInputAuto from '../components/SearchFormInputAuto'
+import client from '../client'
+
 
 class SearchForm extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { cityFrom: 'PRG', cityTo: 'NAP', date: '20/03/2018' }
+        this.state = {
+            cityFrom: 'PRG',
+            cityFromLocations: [],
+            cityTo: 'NAP',
+            cityToLocations: [],
+            date: '20/03/2018'
+        }
+        this.autocompleteTimeout = 250
     }
 
-    handleOnChange = e => {
+    handleOnInputChange = e => {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    render() {
+    handleAutocompleteOnChange = e => {
+        clearTimeout(this.timeoutHandler)
+        this.handleOnInputChange(e)
 
-        const { date, cityTo, cityFrom } = this.state
+        const getAndSetLocations = () => client
+            .doLocationsGetApiRequest({ term: e.target.value })
+            .then(res => this.setState({ [`${e.target.name}Locations`]: res.locations }))
+
+        this.timeoutHandler = setTimeout(getAndSetLocations, this.autocompleteTimeout)
+    }
+
+    render() {
+        const { date, cityTo, cityFrom, cityFromLocations, cityToLocations } = this.state
         const { onSubmit } = this.props
 
         return (
             <div>
-                <SearchFormInput
+                <SearchFormInputAuto
                     type='text'
                     name='cityFrom'
                     label='From'
                     value={cityFrom}
-                    onChange={this.handleOnChange} />
+                    items={cityFromLocations}
+                    onChange={this.handleAutocompleteOnChange} />
 
-                <SearchFormInput
+                <SearchFormInputAuto
                     type='text'
                     name='cityTo'
                     label='To'
                     value={cityTo}
-                    onChange={this.handleOnChange} />
+                    items={cityToLocations}
+                    onChange={this.handleAutocompleteOnChange} />
 
                 <SearchFormInput
                     type='date'
                     name='date'
                     label='Date'
                     value={date}
-                    onChange={this.handleOnChange} />
+                    onChange={this.handleOnInputChange} />
 
-                <button onClick={() => onSubmit(this.state)}>
+                <button onClick={() => onSubmit({ cityTo, cityFrom, date })}>
                     Search
               </button>
             </div>
