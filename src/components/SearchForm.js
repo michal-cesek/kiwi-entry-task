@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import moment from 'moment';
 import client from '../client'
-import SearchFormInput from '../components/SearchFormInput'
 import SearchFormInputAuto from '../components/SearchFormInputAuto'
+import SearchFormInputDate from '../components/SearchFormInputDate'
 
 const autocompleteTimeout = 250
 
@@ -14,7 +15,7 @@ class SearchForm extends Component {
             cityFromLocations: [],
             cityTo: 'NAP',
             cityToLocations: [],
-            date: '20/03/2018'
+            date: moment()
         }
     }
 
@@ -39,7 +40,6 @@ class SearchForm extends Component {
         return (
             <div>
                 <SearchFormInputAuto
-                    type='text'
                     name='cityFrom'
                     label='From'
                     value={cityFrom}
@@ -47,19 +47,18 @@ class SearchForm extends Component {
                     onChange={this.handleAutocompleteOnChange} />
 
                 <SearchFormInputAuto
-                    type='text'
                     name='cityTo'
                     label='To'
                     value={cityTo}
                     items={cityToLocations}
                     onChange={this.handleAutocompleteOnChange} />
 
-                <SearchFormInput
-                    type='date'
+                <SearchFormInputDate
                     name='date'
                     label='Date'
                     value={date}
                     onChange={this.handleOnInputChange} />
+
 
                 <button onClick={() => this.props.onSubmit({ cityTo, cityFrom, date })}>
                     Search
