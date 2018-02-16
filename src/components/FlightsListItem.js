@@ -1,15 +1,16 @@
 import React from 'react'
 import dateformat from 'dateformat'
 
-const foo = ts => dateformat(new Date(parseInt(ts, 10) * 1000), 'HH:MM dd/mm/yy')
+const formatDateTime = ts =>
+    dateformat(new Date(parseInt(ts, 10) * 1000), 'HH:MM dd/mm/yy')
 
 const FlightsListItem = ({ data: { cityFrom, cityTo, price, dTime, aTime } }) =>
-    <div className='result-item'>
-        <div> <strong>{price}</strong> EUR</div>
+    <div className='flight-list-item'>
+        <div><strong>{price}</strong>EUR</div>
         <div>
-            <span>{foo(dTime)}</span>
+            <span>{formatDateTime(dTime)}</span>
             <strong>{cityFrom} -> {cityTo}</strong>
-            <span>{foo(aTime)}</span>
+            <span>{formatDateTime(aTime)}</span>
         </div>
     </div>
 

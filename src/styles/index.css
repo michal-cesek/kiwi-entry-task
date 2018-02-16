@@ -16,17 +16,27 @@ body {
 
 }
 
-.result-item{
+.flight-list-item{
   display: flex;
 }
 
-.result-item > div{
+.rflight-list-item > div{
   padding: 10px
 }
 
-.result-item > div > span{
+.flight-list-item > div > span{
   font-size: smaller;
   color: grey;
   margin: 0 5px;
 }
 
+.selected{
+  font-weight: bold;
+}
+
+.paginated-list-nav > span{
+  padding: 8px 10px;
+  background: #ddd;
+  user-select: none;
+  margin: 0 2px;
+}

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import client from '../client'
 import SearchFormInput from '../components/SearchFormInput'
 import SearchFormInputAuto from '../components/SearchFormInputAuto'
-import client from '../client'
 
+const autocompleteTimeout = 250
 
 class SearchForm extends Component {
 
@@ -15,7 +16,6 @@ class SearchForm extends Component {
             cityToLocations: [],
             date: '20/03/2018'
         }
-        this.autocompleteTimeout = 250
     }
 
     handleOnInputChange = e => {
@@ -30,12 +30,11 @@ class SearchForm extends Component {
             .doLocationsGetApiRequest({ term: e.target.value })
             .then(res => this.setState({ [`${e.target.name}Locations`]: res.locations }))
 
-        this.timeoutHandler = setTimeout(getAndSetLocations, this.autocompleteTimeout)
+        this.timeoutHandler = setTimeout(getAndSetLocations, autocompleteTimeout)
     }
 
     render() {
         const { date, cityTo, cityFrom, cityFromLocations, cityToLocations } = this.state
-        const { onSubmit } = this.props
 
         return (
             <div>
@@ -62,7 +61,7 @@ class SearchForm extends Component {
                     value={date}
                     onChange={this.handleOnInputChange} />
 
-                <button onClick={() => onSubmit({ cityTo, cityFrom, date })}>
+                <button onClick={() => this.props.onSubmit({ cityTo, cityFrom, date })}>
                     Search
               </button>
             </div>
