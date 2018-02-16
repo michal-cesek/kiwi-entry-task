@@ -39,6 +39,12 @@ class SearchForm extends Component {
 
         return (
             <div>
+                <SearchFormInputDate
+                    name='date'
+                    label='Date'
+                    value={date}
+                    onChange={this.handleOnInputChange} />
+
                 <SearchFormInputAuto
                     name='cityFrom'
                     label='From'
@@ -52,13 +58,6 @@ class SearchForm extends Component {
                     value={cityTo}
                     items={cityToLocations}
                     onChange={this.handleAutocompleteOnChange} />
-
-                <SearchFormInputDate
-                    name='date'
-                    label='Date'
-                    value={date}
-                    onChange={this.handleOnInputChange} />
-
 
                 <button onClick={() => this.props.onSubmit({ cityTo, cityFrom, date })}>
                     Search

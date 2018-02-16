@@ -11,12 +11,14 @@ const buildFlightsApiUrl = ({ cityFrom, cityTo, date }) => {
 const buildLocationsApiUrl = ({ term }) =>
     `${apiSkypickerUrl}/locations/?term=${term}&v=2&locale=en-US`
 
-
-const doGetRequest = url => fetch(url).then(res => res.json())
-    .catch(error => {
-        console.error('Error:', error)
-        return {data: [], locations: []}
-    })
+// TODO better error handling
+const doGetRequest = url =>
+    fetch(url)
+        .then(res => res.json())
+        .catch(error => {
+            console.error('Error:', error)
+            return { data: [], locations: [] }
+        })
 
 const doFlightsGetApiRequest = params => doGetRequest(buildFlightsApiUrl(params))
 const doLocationsGetApiRequest = params => doGetRequest(buildLocationsApiUrl(params))

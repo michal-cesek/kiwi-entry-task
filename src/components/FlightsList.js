@@ -14,7 +14,8 @@ class FlightList extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps !== this.props) {
-            client.doFlightsGetApiRequest(this.props.filter)
+            client
+                .doFlightsGetApiRequest(this.props.filter)
                 .then(res => this.setState({ flights: res.data }))
         }
     }
@@ -28,6 +29,5 @@ class FlightList extends Component {
         )
     }
 }
-
 
 export default FlightList

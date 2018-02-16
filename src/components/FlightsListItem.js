@@ -6,8 +6,8 @@ const formatDateTime = ts =>
 
 const FlightsListItem = ({ data: { cityFrom, cityTo, price, dTime, aTime } }) =>
     <div className='flight-list-item'>
-        <div><strong>{price}</strong>EUR</div>
-        <div>
+        <div><strong>{price}</strong> EUR</div>
+        <div className={'flight-list-item-info'}>
             <span>{formatDateTime(dTime)}</span>
             <strong>{cityFrom} -> {cityTo}</strong>
             <span>{formatDateTime(aTime)}</span>

@@ -4,23 +4,29 @@ body {
   font-family: sans-serif;
 }
 
-.App-header{
-
+input, button{
+  padding: 4px 6px;
+  margin: 3px 0;
+  font-weight: bold;
+  width: 100%;
 }
 
-.App-title{
-  
-}
+label{
+  display: block;
+  margin: 8px 0 2px 0;
+} 
 
-.App-main{
-
+.app{
+  margin: 0 auto;
+  width: 500px
 }
 
 .flight-list-item{
   display: flex;
+  text-align: center
 }
 
-.rflight-list-item > div{
+.flight-list-item > div{
   padding: 10px
 }
 
@@ -30,11 +36,17 @@ body {
   margin: 0 5px;
 }
 
+.flight-list-item-info{
+  flex: 1
+}
+
 .selected{
   font-weight: bold;
 }
 
-.paginated-list-nav > span{
+.paginated-list-nav > div{
+  display: inline-block;
+  cursor: pointer;
   padding: 8px 10px;
   background: #ddd;
   user-select: none;

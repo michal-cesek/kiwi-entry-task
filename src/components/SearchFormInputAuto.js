@@ -3,7 +3,7 @@ import Autocomplete from 'react-autocomplete'
 
 const SearchFormInputAuto = ({ label, name, value, items, onChange }) =>
     <div>
-        <div>{label}</div>
+        <label>{label}</label>
         <div>
             <Autocomplete
                 getItemValue={item => item.code}

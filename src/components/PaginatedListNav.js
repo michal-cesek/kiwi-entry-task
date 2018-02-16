@@ -1,12 +1,16 @@
 import React from 'react'
 
-const PaginatedListNav = ({ nPages, currentPage, onClick }) =>
-    <div className={'paginated-list-nav'}>
+const PaginatedListNav = ({ nPages, currentPage, onClick }) => {
+    if (nPages === 1)
+        return null
+
+    return <div className='paginated-list-nav'>
         {[...Array(nPages)].map((v, i) =>
-            <span key={i} 
-            className={currentPage === i + 1 ? 'selected' : ''}
-                onClick={() => onClick(i + 1)}>{i + 1}</span>
+            <div key={i}
+                className={currentPage === (i + 1) ? 'selected' : ''}
+                onClick={() => onClick(i + 1)}>{i + 1}</div>
         )}
     </div>
+}
 
 export default PaginatedListNav

@@ -16,19 +16,11 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App">
-        <header className="App-header">
-          {/* <h1 className="App-title">Welcome to my entry task solution</h1> */}
-        </header>
-        <div className="App-main">
-
-          <SearchForm
-            onSubmit={this.handleOnSubmit} />
-
-          <FlightsList
-            filter={this.state.filter} />
-
-        </div>
+      <div className='app'>
+        <SearchForm
+          onSubmit={this.handleOnSubmit} />
+        <FlightsList
+          filter={this.state.filter} />
       </div>
     )
   }
